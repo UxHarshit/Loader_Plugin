@@ -28,7 +28,7 @@ static std::string j2h(JNIEnv *env,jclass thiz,const jstring text)
     return std::string((char *)pBytes, length);
 }
 
-const char *cFPS = "                    Team UxH";
+const char *cFPS = "Team UxH";
 
 void nFps(JNIEnv * env , jclass clazz ,jstring fps){
     mFps = j2h(env,clazz,fps);
@@ -73,7 +73,7 @@ void nDraw(JNIEnv *env,jclass clazz, jobject canvas,jint w, jint h,jfloat d){
     lCanvas->refresh(canvas);
     lCanvas->drawText(cFPS,100,50,16,0xFFFFFFFF,0x0);
     if (bFPS){
-        lCanvas->drawText(mFps.c_str(),300,fpsH ,20,0xFFFFFFFF,0x0);
+        lCanvas->drawText(mFps.c_str(),100,50,20,0xFFFFFFFF,0x0);
     }
 
 }
