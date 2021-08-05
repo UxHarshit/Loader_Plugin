@@ -1,5 +1,6 @@
 package com.teamuxh.glplugin.dMan;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -25,8 +26,10 @@ public class dMan extends View implements Runnable {
     int mFPS = 0;
     long mFpS시각 = 0;
     int mFpS카운터 = 0;
+    Point sS;
     float den = 0;
     Context ctx;
+    Display dps;
     int FPS = 60;
     long 수면시간;
     Thread m실;
@@ -35,8 +38,8 @@ public class dMan extends View implements Runnable {
 
     public dMan(Context context) {
         super(context);
-        Point sS = new Point();
-        Display dps = Fs.emWM.getDefaultDisplay();
+        sS = new Point();
+        dps = Fs.emWM.getDefaultDisplay();
         dps.getRealSize(sS);
         den = getResources().getDisplayMetrics().density;
         sw = sS.x;
@@ -46,12 +49,17 @@ public class dMan extends View implements Runnable {
         m실.start();
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        dps.getRealSize(sS);
+        den = getResources().getDisplayMetrics().density;
+        sw = sS.x;
+        sh = sS.y;
         onDC(canvas,sw,sh,den);
         gFPS();
-
         invalidate();
     }
 

@@ -70,13 +70,13 @@ public class Fs extends Service {
         emWM = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         ov = new dMan(context);
         tp = gLT();
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams(-1,-1,tp,56,-3);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams(-1,-1,tp,WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,-3);
         if (Build.VERSION.SDK_INT >= 28){
             lp.layoutInDisplayCutoutMode = 1;
         }
         lp.x = 0;
-        lp.y = 0;
-        lp.gravity = 51;
+        lp.y = 100;
+        lp.gravity = Gravity.TOP | Gravity.START;
         emWM.addView(ov, lp);
     }
     @Override

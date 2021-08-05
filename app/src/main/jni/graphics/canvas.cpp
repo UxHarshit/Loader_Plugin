@@ -84,6 +84,8 @@ void canvas::drawText(const char *text, float X, float Y, float size, int textCo
     env->DeleteLocalRef(txt);
 }
 
+
+
 void canvas::drawText(const wchar_t *text, float X, float Y, float size, int textColor,
                       int outlineColor) {
     grp *mGrp = this->mTextDraw;
