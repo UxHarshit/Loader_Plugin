@@ -39,6 +39,11 @@ void nHD(JNIEnv * env , jclass clazz ){
 
 }
 
+void setFov(JNIEnv *env,jclass clazz,jint i){
+    radiusFOV = i;
+    LOGD("%d",i);
+}
+
 void mFunction(JNIEnv *env,jclass clazz,jint i){
     LOGD("%d",i);
     switch (i) {
@@ -57,6 +62,12 @@ void mFunction(JNIEnv *env,jclass clazz,jint i){
                 lCanvas->mHD(true);
             }
             break;
+        case 430:
+            if (sFOV) {
+                sFOV = false;
+            } else {
+                sFOV = true;
+            }
     }
 }
 
@@ -75,13 +86,17 @@ void nDraw(JNIEnv *env,jclass clazz, jobject canvas,jint w, jint h,jfloat d){
     if (bFPS){
         lCanvas->drawText(mFps.c_str(),100,50,20,0xFFFFFFFF,0x0);
     }
+    if (sFOV){
+        lCanvas->drawCircle(gSW/2,gSH/2.12,radiusFOV,5,-0x10000);
+    }
 
 }
 
 int Reg1(JNIEnv * env){
     JNINativeMethod method[] = {
             {"hd","()V",(void *) nHD},
-            {"mSwitch","(I)V",(void *) mFunction}
+            {"mSwitch","(I)V",(void *) mFunction},
+            {"setFOV","(I)V",(void *) setFov}
     };
     jclass clazz = env->FindClass("com/teamuxh/glplugin/Fs");
     if (!clazz)

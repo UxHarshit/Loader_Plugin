@@ -595,7 +595,7 @@
                     </ScrollView>
                     <ScrollView
                         android:id="@+id/layaimbot"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:overScrollMode="never"
                         android:scrollbarThumbHorizontal="@android:color/transparent"
                         android:scrollbarThumbVertical="@android:color/transparent"
@@ -632,6 +632,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content">
                                         <RadioButton
+                                            android:id="@+id/aimDisable"
                                             android:text="Disable"
                                             android:gravity="center"
                                             android:textStyle="bold"
@@ -643,6 +644,7 @@
                                             android:layout_height="wrap_content"/>
 
                                         <RadioButton
+                                            android:id="@+id/memAimBot"
                                             android:text="Memory AimBot"
                                             android:gravity="center"
                                             android:textStyle="bold"
@@ -653,6 +655,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"/>
                                         <RadioButton
+                                            android:id="@+id/tchAimBot"
                                             android:text="Touch Simulation"
                                             android:gravity="center"
                                             android:textStyle="bold"
@@ -675,34 +678,64 @@
                                 app:neumorph_shadowColorLight="@color/light_shadow"
                                 app:neumorph_shapeType="flat">
                                 <LinearLayout
-                                    android:orientation="horizontal"
+                                    android:orientation="vertical"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
+                                    <LinearLayout
+                                        android:orientation="horizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+                                        <soup.neumorphism.NeumorphTextView
+                                            android:textColor="@color/black"
+                                            app:fontFamily="sans-serif-condensed-medium"
+                                            android:layout_marginTop="@dimen/_6sdp"
+                                            android:layout_marginLeft="@dimen/_9sdp"
+                                            android:text="Show Fov"
+                                            android:elevation="@dimen/_2sdp"
+                                            android:textSize="@dimen/_12sdp"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"/>
+                                        <Space
+                                            android:layout_weight="1"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"/>
+                                        <CheckBox
+                                            android:id="@+id/showFOV"
+                                            android:layout_marginTop="@dimen/_4sdp"
+                                            android:layout_marginBottom="@dimen/_4sdp"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginRight="5dp"
+                                            android:button="@null"
+                                            android:checked="false"
+                                            android:clickable="true"
+                                            android:drawableRight="@drawable/checkbox_selector"
+                                            android:focusable="false" />
+                                    </LinearLayout>
                                     <soup.neumorphism.NeumorphTextView
                                         android:textColor="@color/black"
                                         app:fontFamily="sans-serif-condensed-medium"
                                         android:layout_marginTop="@dimen/_6sdp"
                                         android:layout_marginLeft="@dimen/_9sdp"
-                                        android:text="Show Fov"
+                                        android:text="Resize FOV"
                                         android:elevation="@dimen/_2sdp"
                                         android:textSize="@dimen/_12sdp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"/>
-                                    <Space
-                                        android:layout_weight="1"
-                                        android:layout_width="wrap_content"
+                                    <SeekBar
+                                        android:id="@+id/rezFOV"
+                                        android:progressDrawable="@drawable/bak_layer"
+                                        android:progressBackgroundTintMode="@android:color/transparent"
+                                        android:indeterminateDrawable="@drawable/bak_layer"
+                                        android:thumbTint="@color/black"
+                                        android:min="110"
+                                        android:max="500"
+                                        android:layout_marginRight="@dimen/_6sdp"
+                                        android:layout_marginTop="@dimen/_3sdp"
+                                        android:layout_marginBottom="@dimen/_3sdp"
+                                        android:layout_marginLeft="@dimen/_6sdp"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"/>
-                                    <CheckBox
-                                        android:layout_marginTop="@dimen/_4sdp"
-                                        android:layout_marginBottom="@dimen/_4sdp"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="5dp"
-                                        android:button="@null"
-                                        android:checked="false"
-                                        android:clickable="true"
-                                        android:drawableRight="@drawable/checkbox_selector"
-                                        android:focusable="false" />
                                 </LinearLayout>
                             </soup.neumorphism.NeumorphCardView>
                             <soup.neumorphism.NeumorphCardView
@@ -1143,7 +1176,7 @@
                     </ScrollView>
                     <ScrollView
                         android:id="@+id/laysettings"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:overScrollMode="never"
                         android:scrollbarThumbHorizontal="@android:color/transparent"
                         android:scrollbarThumbVertical="@android:color/transparent"

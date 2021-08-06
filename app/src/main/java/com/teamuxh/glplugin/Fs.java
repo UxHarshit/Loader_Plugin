@@ -22,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -45,10 +46,12 @@ public class Fs extends Service {
     ScrollView layEsp,layAimbot,layItems,layCars,laySettings;
     ImageView icLogo,hide;
     GestureDetector gestureDetector;
-    CheckBox showFPS;
+    CheckBox showFPS,showFOV;
+    SeekBar rezFOV;
 
     private static native void hd();
     private static native void mSwitch(int 안건ID);
+    private static native void setFOV(int 반지름);
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -117,6 +120,8 @@ public class Fs extends Service {
         layCars = 플로트뷰.findViewById(R.id.laycars);
         laySettings = 플로트뷰.findViewById(R.id.laysettings);
         showFPS = 플로트뷰.findViewById(R.id.showFPS);
+        showFOV = 플로트뷰.findViewById(R.id.showFOV);
+        rezFOV = 플로트뷰.findViewById(R.id.rezFOV);
 
         esp.setOnClickListener(cl());
         aimbot.setOnClickListener(cl());
@@ -125,6 +130,8 @@ public class Fs extends Service {
         settings.setOnClickListener(cl());
 
         showFPS.setOnClickListener(mcl());
+        showFOV.setOnClickListener(mcl());
+        rezFOV.setOnSeekBarChangeListener(sbcl());
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setCornerRadius(20);
         gradientDrawable.setColor(Color.parseColor("#E4EBF5"));
@@ -188,6 +195,26 @@ public class Fs extends Service {
             }
         };
     }
+
+    private SeekBar.OnSeekBarChangeListener sbcl(){
+        return new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setFOV(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        };
+    }
+
     public View.OnClickListener cl(){
         return new View.OnClickListener() {
             @SuppressLint("NonConstantResourceId")
@@ -282,6 +309,9 @@ public class Fs extends Service {
                             mSwitch(60);
                             logger.LogD("Show FPS 장애가있는");
                         }
+                        break;
+                    case R.id.showFOV:
+                        mSwitch(430);
                         break;
                 }
             }

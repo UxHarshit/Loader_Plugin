@@ -10,6 +10,8 @@ int gSH = 0;
 bool bFPS = false;
 std::string mFps;
 bool sHD = true;
+bool sFOV = false;
+int radiusFOV = 110;
 int fpsW = gSW/35;
 int fpsH = gSH/35;
 #endif //GLPLUGIN_INIT_H

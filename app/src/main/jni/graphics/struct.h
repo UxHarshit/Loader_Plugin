@@ -9,7 +9,7 @@
 #ifndef GLPLUGIN_STRUCT_H
 #define GLPLUGIN_STRUCT_H
 enum Style{
-    FILL =0,
+    FILL = 0,
     STROKE = 1,
     FILL_AND_STROKE = 2
 
