@@ -55,7 +55,10 @@ canvas::canvas(JNIEnv *env, int width, int height, float density, bool hd) {
     jclass mCanvas = env->FindClass("android/graphics/Canvas");
     this->dtC = env->GetMethodID(mCanvas,"drawText","(Ljava/lang/String;FFLandroid/graphics/Paint;)V");
     this->dCc = env->GetMethodID(mCanvas, "drawCircle", "(FFFLandroid/graphics/Paint;)V");
+    this->dCb = env->GetMethodID(mCanvas, "drawRect", "(FFFFLandroid/graphics/Paint;)V");
     env->DeleteLocalRef(mCanvas);
+
+
 
     this->mTextDraw = new grp(this->env);
     mTextDraw->setStyle(Style::FILL);
@@ -65,6 +68,9 @@ canvas::canvas(JNIEnv *env, int width, int height, float density, bool hd) {
     mCircle->setStyle(Style::STROKE);
     mCircle->setAntiAlias(true);
 
+    this->mSolid = new grp(this->env);
+    mSolid->setStyle(Style::FILL);
+    mSolid->setAntiAlias(true);
 }
 void canvas::mHD(bool mhd) {
     this->HD = mhd;
@@ -124,4 +130,20 @@ void canvas::drawCircle(float x, float y, float radius, float thickness, int col
     mGrp->setColor(color);
     mGrp->setStroke(thickness);
     env->CallVoidMethod(this->mCanvas, this->dCc,x,y,radius,mGrp->grpB );
+}
+
+void canvas::drawBox(float x, float y, float width, float height, int color) {
+    grp *mGrp = this->mSolid;
+
+    mGrp->setColor(color);
+
+    env->CallVoidMethod(this->mCanvas, this->dCb, x, y, x + width, y + height, mGrp->grpB);
+}
+
+void canvas::drawBox(Vector2 vecX, float width, float height, int color) {
+    grp *mGrp = this->mSolid;
+
+    mGrp->setColor(color);
+
+    env->CallVoidMethod(this->mCanvas, this->dCb, vecX.x, vecX.y, vecX.x + width, vecX.y + height, mGrp->grpB);
 }

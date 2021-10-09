@@ -22,7 +22,8 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := teamUxHGl
 LOCAL_SRC_FILES := uxh.cpp \
 	graphics/canvas.cpp \
-	graphics/grp.cpp
+	graphics/grp.cpp \
+	graphics/rect.cpp
 LOCAL_LDLIBS := -llog -landroid -lz
 LOCAL_STATIC_LIBRARIES := libcurl libssl libcrypto
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include/

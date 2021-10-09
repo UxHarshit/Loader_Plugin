@@ -5,6 +5,7 @@
 #include "grp.h"
 #include <wchar.h>
 #include "canvas.h"
+#include "rect.h"
 jstring wcstojstr2(JNIEnv *env, const wchar_t *input) {
     jobject bb = env->NewDirectByteBuffer((void *) input, wcslen(input) * sizeof(wchar_t));
     static jstring UTF32LE = 0;

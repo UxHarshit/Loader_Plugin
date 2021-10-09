@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.GradientDrawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
 
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -46,12 +48,13 @@ public class Fs extends Service {
     ScrollView layEsp,layAimbot,layItems,layCars,laySettings;
     ImageView icLogo,hide;
     GestureDetector gestureDetector;
-    CheckBox showFPS,showFOV;
+    CheckBox showFPS,showFOV,showEntity;
     SeekBar rezFOV;
 
     private static native void hd();
     private static native void mSwitch(int 안건ID);
     private static native void setFOV(int 반지름);
+    private static native void sDaemon();
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -62,7 +65,14 @@ public class Fs extends Service {
     public void onCreate() {
         super.onCreate();
         logger.doLog = true;
+        Log.d("FS ->","STAARTED");
         보기만들기();
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                sDaemon();
+            }
+        });
         dC(this);
     }
 
@@ -122,6 +132,7 @@ public class Fs extends Service {
         showFPS = 플로트뷰.findViewById(R.id.showFPS);
         showFOV = 플로트뷰.findViewById(R.id.showFOV);
         rezFOV = 플로트뷰.findViewById(R.id.rezFOV);
+        showEntity = 플로트뷰.findViewById(R.id.showEntity);
 
         esp.setOnClickListener(cl());
         aimbot.setOnClickListener(cl());
@@ -131,6 +142,8 @@ public class Fs extends Service {
 
         showFPS.setOnClickListener(mcl());
         showFOV.setOnClickListener(mcl());
+        showEntity.setOnClickListener(mcl());
+
         rezFOV.setOnSeekBarChangeListener(sbcl());
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setCornerRadius(20);
@@ -312,6 +325,9 @@ public class Fs extends Service {
                         break;
                     case R.id.showFOV:
                         mSwitch(430);
+                        break;
+                    case R.id.showEntity:
+                        mSwitch(100);
                         break;
                 }
             }

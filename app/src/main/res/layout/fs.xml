@@ -178,7 +178,7 @@
                     android:layout_height="match_parent">
                     <ScrollView
                         android:id="@+id/layesp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:overScrollMode="never"
                         android:scrollbarThumbHorizontal="@android:color/transparent"
                         android:scrollbarThumbVertical="@android:color/transparent"
@@ -526,7 +526,7 @@
                                         app:fontFamily="sans-serif-condensed-medium"
                                         android:layout_marginTop="@dimen/_6sdp"
                                         android:layout_marginLeft="@dimen/_9sdp"
-                                        android:text="Show Count"
+                                        android:text="Show Entity Count"
                                         android:elevation="@dimen/_2sdp"
                                         android:textSize="@dimen/_12sdp"
                                         android:layout_width="wrap_content"
@@ -536,6 +536,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"/>
                                     <CheckBox
+                                        android:id="@+id/showEntity"
                                         android:layout_marginTop="@dimen/_4sdp"
                                         android:layout_marginBottom="@dimen/_4sdp"
                                         android:layout_width="wrap_content"
@@ -595,7 +596,7 @@
                     </ScrollView>
                     <ScrollView
                         android:id="@+id/layaimbot"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:overScrollMode="never"
                         android:scrollbarThumbHorizontal="@android:color/transparent"
                         android:scrollbarThumbVertical="@android:color/transparent"
